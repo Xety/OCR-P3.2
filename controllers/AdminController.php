@@ -109,8 +109,8 @@ class AdminController {
         $_SESSION['user'] = $user;
         $_SESSION['idUser'] = $user->getId();
 
-        // On redirige vers la page d'administration.
-        Utils::redirect("admin");
+        // On redirige vers la page de monitoring.
+        Utils::redirect("monitoring");
     }
 
     /**
