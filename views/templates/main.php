@@ -1,10 +1,10 @@
-<?php 
+<?php
 /**
- * Ce fichier est le template principal qui "contient" ce qui aura été généré par les autres vues.  
- * 
- * Les variables qui doivent impérativement être définie sont : 
+ * Ce fichier est le template principal qui "contient" ce qui aura été généré par les autres vues.
+ *
+ * Les variables qui doivent impérativement être définie sont :
  *      $title string : le titre de la page.
- *      $content string : le contenu de la page. 
+ *      $content string : le contenu de la page.
  */
 
 ?>
@@ -22,8 +22,8 @@
         <nav>
             <a href="index.php">Articles</a>
             <a href="index.php?action=apropos">À propos</a>
-            <?php 
-                // Si on est connecté, on affiche le bouton de déconnexion, sinon, on affiche le bouton de connexion : 
+            <?php
+                // Si on est connecté, on affiche le bouton de déconnexion, sinon, on affiche le bouton de connexion :
                 if (isset($_SESSION['user'])) {
                     echo '<a href="index.php?action=disconnectUser">Déconnexion</a>';
                 }
@@ -32,12 +32,12 @@
         <h1>Emilie Forteroche</h1>
     </header>
 
-    <main>    
+    <main>
         <?= $content /* Ici est affiché le contenu réel de la page. */ ?>
     </main>
-    
+
     <footer>
-        <p>Copyright © Emilie Forteroche 2023 - Openclassrooms - <a href="index.php?action=admin">Admin</a>
+        <p>Copyright © Emilie Forteroche 2023 - Openclassrooms - <a href="index.php?action=monitoring">Dashboard</a></p>
     </footer>
 
 </body>

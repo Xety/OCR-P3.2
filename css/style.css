@@ -118,7 +118,7 @@ form .formGrid .submit {
 .foldedCorner {
     position: relative;
     overflow: hidden;
-} 
+}
 
 .foldedCorner::before {
     content: "";
@@ -140,7 +140,7 @@ header {
     flex-direction: column;
     width: 100%;
     margin-bottom: 30px;
-    background-color: var(--headerPaleColor); 
+    background-color: var(--headerPaleColor);
 }
 
 header > nav {
@@ -305,7 +305,7 @@ a.info {
 
 /**
  * Partie admin
- */ 
+ */
 
 .adminArticle {
     margin-bottom: 20px;
@@ -314,7 +314,7 @@ a.info {
 }
 
 .articleLine {
-    display: flex; 
+    display: flex;
 }
 
 .articleLine div {
@@ -337,7 +337,61 @@ a.info {
     border: 1px solid var(--backgroundColor);
 }
 
-/** 
+.adminHeader {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.adminHeader .submit {
+    white-space: nowrap;
+}
+
+.adminMonitoring {
+    width: 100%;
+    margin-bottom: 20px;
+    background-color: var(--commentPaleColor);
+    color: white;
+}
+
+.adminMonitoring .articleTitle {
+    font-weight: bold;
+    font-style: italic;
+    text-decoration: underline;
+}
+
+.adminMonitoring table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.adminMonitoring th,
+.adminMonitoring td {
+    padding: 15px 20px;
+    border: 2px solid var(--backgroundColor);
+    text-align: center;
+}
+
+.adminMonitoring td:first-child {
+    text-align: left;
+}
+
+.adminMonitoring th {
+    font-weight: bold;
+}
+
+.adminMonitoring tbody tr:nth-child(odd) td {
+    background-color: var(--commentPaleColor);
+}
+
+/* Alternance des couleurs pour les lignes du tableau de monitoring */
+.adminMonitoring tbody tr:nth-child(even) td {
+    background-color: var(--headerColor);
+}
+
+/**
  * Footer global de la page.
  */
 footer {
@@ -345,7 +399,7 @@ footer {
     bottom: 0;
     display: flex;
     justify-content: center;
-    width: 100%;;
+    width: 100%;
     padding: 20px;
     color: white;
     background-color: var(--headerColor);

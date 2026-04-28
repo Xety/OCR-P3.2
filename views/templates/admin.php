@@ -1,11 +1,16 @@
-<?php 
-    /** 
-     * Affichage de la partie admin : liste des articles avec un bouton "modifier" pour chacun. 
-     * Et un formulaire pour ajouter un article. 
+<?php
+    /**
+     * Affichage de la partie admin : liste des articles avec un bouton "modifier" pour chacun.
+     * Et un formulaire pour ajouter un article.
      */
 ?>
 
-<h2>Edition des articles</h2>
+<div class="adminHeader">
+    <h2>
+        Edition des articles
+    </h2>
+    <a class="submit" href="index.php?action=monitoring">Dashboard</a>
+</div>
 
 <div class="adminArticle">
     <?php foreach ($articles as $article) { ?>
