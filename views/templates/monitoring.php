@@ -39,6 +39,7 @@
                         Date de publication <?= $sort === 'date_creation' ? ($order === 'asc' ? '↑' : '↓') : '↕' ?>
                     </a>
                 </th>
+                <th class="col-action">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -52,6 +53,11 @@
                     <td><?= $article->getViews() ?></td>
                     <td><?= $article->getCommentsCount() ?></td>
                     <td><?= Utils::convertDateToFrenchFormat($article->getDateCreation()) ?></td>
+                    <td>
+                        <a class="submit" href="index.php?action=showComments&idArticle=<?= $article->getId() ?>">
+                            Gérer les commentaires
+                        </a>
+                    </td>
                 </tr>
             <?php } ?>
         </tbody>

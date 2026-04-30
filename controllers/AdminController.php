@@ -6,6 +6,13 @@
 class AdminController {
 
     /**
+     * Nombre d'articles par page.
+     *
+     * @var int
+     */
+    private const ARTICLES_PER_PAGE = 3;
+
+    /**
      * Affiche la page d'administration.
      * @return void
      */
@@ -25,6 +32,11 @@ class AdminController {
         ]);
     }
 
+    /**
+     * Affiche la page de monitoring.
+     *
+     * @return void
+     */
     public function showMonitoring() : void
     {
         // On vérifie que l'utilisateur est connecté.
@@ -205,5 +217,75 @@ class AdminController {
 
         // On redirige vers la page d'administration.
         Utils::redirect("admin");
+    }
+
+    /**
+     * Affiche les commentaires d'un article.
+     *
+     * @throws Exception
+     *
+     * @return void
+     */
+    public function showComments() : void
+    {
+        $this->checkIfUserIsConnected();
+
+        // Récupération de l'id de l'article demandé.
+        $id = Utils::request("idArticle", -1);
+
+        $articleManager = new ArticleManager();
+        $article = $articleManager->getArticleByIdWithCount($id);
+
+        if (!$article) {
+            throw new Exception("L'article n'existe pas.");
+        }
+
+        $page = (int)Utils::request("page", 1);
+
+        // Calcul du nombre total de pages.
+        $limit = self::ARTICLES_PER_PAGE;
+        $totalPages = ceil($article->getCommentsCount() / $limit);
+
+        // Si la page demandée n'est pas valide, on redirige vers la page 1.
+        if ($page < 1 || ($page > $totalPages && $totalPages > 0)) {
+            Utils::redirect("showComments&idArticle=$id&page=1");
+        }
+
+        // On récupère les commentaires de l'article avec pagination.
+        $commentManager = new CommentManager();
+        $comments = $commentManager->getCommentsPaginatedByArticleId($id, $limit, ($page - 1) * $limit);
+
+        // On affiche la page de gestion des commentaires.
+        $view = new View("Gestion des commentaires");
+        $view->render("admin/comments", [
+            'comments' => $comments,
+            'article' => $article,
+            'page' => $page,
+            'limit' => $limit,
+            'totalPages' => $totalPages
+        ]);
+    }
+
+    /**
+     * Supprime un commentaire.
+     *
+     * @return void
+     */
+    public function deleteComment() : void
+    {
+        $this->checkIfUserIsConnected();
+
+        $id = Utils::request("id", -1);
+
+        // On vérifie que le commentaire existe.
+        $commentManager = new CommentManager();
+        $comment = $commentManager->getCommentById($id);
+        if ($comment) {
+            // On supprime le commentaire.
+            $commentManager->deleteComment($comment);
+        }
+
+        // On redirige vers la page de gestion des commentaires.
+        Utils::redirect("showComments&idArticle=" . $comment->getIdArticle());
     }
 }

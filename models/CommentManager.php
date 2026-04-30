@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Cette classe sert à gérer les commentaires. 
+ * Cette classe sert à gérer les commentaires.
  */
 class CommentManager extends AbstractEntityManager
 {
@@ -14,6 +14,29 @@ class CommentManager extends AbstractEntityManager
     {
         $sql = "SELECT * FROM comment WHERE id_article = :idArticle";
         $result = $this->db->query($sql, ['idArticle' => $idArticle]);
+        $comments = [];
+
+        while ($comment = $result->fetch()) {
+            $comments[] = new Comment($comment);
+        }
+        return $comments;
+    }
+
+    /**
+     * Récupère les commentaires d'un article avec pagination.
+     *
+     * @param int $idArticle : L'id de l'article.
+     * @param int $limit : Le nombre de commentaires par page.
+     * @param int $offset : L'offset pour la pagination.
+     *
+     * @return Comment[] : Un tableau d'objets Comment.
+     */
+    public function getCommentsPaginatedByArticleId(int $idArticle, int $limit, int $offset) : array
+    {
+        $sql = "SELECT * FROM comment WHERE id_article = :idArticle ORDER BY date_creation DESC LIMIT $limit OFFSET $offset";
+        $result = $this->db->query($sql, [
+            'idArticle' => $idArticle
+        ]);
         $comments = [];
 
         while ($comment = $result->fetch()) {

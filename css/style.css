@@ -345,11 +345,13 @@ a.info {
     margin-bottom: 20px;
 }
 
-.adminHeader .submit {
+.adminHeader .submit,
+.adminMonitoring .submit {
     white-space: nowrap;
 }
 
-.adminMonitoring {
+.adminMonitoring,
+.adminComments {
     width: 100%;
     margin-bottom: 20px;
     background-color: var(--commentPaleColor);
@@ -362,13 +364,16 @@ a.info {
     text-decoration: underline;
 }
 
-.adminMonitoring table {
+.adminMonitoring table,
+.adminComments table {
     width: 100%;
     border-collapse: collapse;
 }
 
 .adminMonitoring th,
-.adminMonitoring td {
+.adminMonitoring td,
+.adminComments th,
+.adminComments td {
     padding: 15px 20px;
     border: 2px solid var(--backgroundColor);
     text-align: center;
@@ -389,6 +394,13 @@ a.info {
 /* Alternance des couleurs pour les lignes du tableau de monitoring */
 .adminMonitoring tbody tr:nth-child(even) td {
     background-color: var(--headerColor);
+}
+
+.pagination {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
 }
 
 /**

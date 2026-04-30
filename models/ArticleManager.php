@@ -38,6 +38,24 @@ class ArticleManager extends AbstractEntityManager
     }
 
     /**
+     * Récupère un article par son id, avec le nombre de commentaires associés.
+     *
+     * @param int $id : l'id de l'article.
+     *
+     * @return Article|null : Un Article ou null si l'article n'existe pas.
+     */
+    public function getArticleByIdWithCount(int $id) : ?Article
+    {
+        $sql = "SELECT a.*, COUNT(c.id) AS comments_count FROM article a LEFT JOIN comment c ON a.id = c.id_article WHERE a.id = :id GROUP BY a.id";
+        $result = $this->db->query($sql, ['id' => $id]);
+        $article = $result->fetch();
+        if ($article) {
+            return new Article($article);
+        }
+        return null;
+    }
+
+    /**
      * Ajoute ou modifie un article.
      * On sait si l'article est un nouvel article car son id sera -1.
      * @param Article $article : l'article à ajouter ou modifier.
