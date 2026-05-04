@@ -13,10 +13,10 @@ class AdminController {
     private const ARTICLES_PER_PAGE = 3;
 
     /**
-     * Affiche la page d'administration.
+     * Affiche la page des articles.
      * @return void
      */
-    public function showAdmin() : void
+    public function showArticles() : void
     {
         // On vérifie que l'utilisateur est connecté.
         $this->checkIfUserIsConnected();
@@ -25,9 +25,9 @@ class AdminController {
         $articleManager = new ArticleManager();
         $articles = $articleManager->getAllArticles();
 
-        // On affiche la page d'administration.
-        $view = new View("Administration");
-        $view->render("admin", [
+        // On affiche la page des articles.
+        $view = new View("Articles");
+        $view->render("admin/articles", [
             'articles' => $articles
         ]);
     }
@@ -60,7 +60,7 @@ class AdminController {
 
         // On affiche la page de monitoring.
         $view = new View("Monitoring");
-        $view->render("monitoring", [
+        $view->render("admin/monitoring", [
             'articles' => $articles,
             'sort' => $sort,
             'order' => $order
@@ -160,7 +160,7 @@ class AdminController {
 
         // On affiche la page de modification de l'article.
         $view = new View("Edition d'un article");
-        $view->render("updateArticleForm", [
+        $view->render("admin/updateArticleForm", [
             'article' => $article
         ]);
     }
@@ -196,8 +196,8 @@ class AdminController {
         $articleManager = new ArticleManager();
         $articleManager->addOrUpdateArticle($article);
 
-        // On redirige vers la page d'administration.
-        Utils::redirect("admin");
+        // On redirige vers la page des articles.
+        Utils::redirect("showArticles");
     }
 
 
@@ -215,8 +215,8 @@ class AdminController {
         $articleManager = new ArticleManager();
         $articleManager->deleteArticle($id);
 
-        // On redirige vers la page d'administration.
-        Utils::redirect("admin");
+        // On redirige vers la page des articles.
+        Utils::redirect("showArticles");
     }
 
     /**

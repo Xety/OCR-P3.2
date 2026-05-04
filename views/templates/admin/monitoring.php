@@ -11,7 +11,7 @@
     <h2>
         Dashboard
     </h2>
-    <a class="submit" href="index.php?action=admin">Voir les articles</a>
+    <a class="submit" href="index.php?action=showArticles">Voir les articles</a>
 </div>
 
 
